@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gym.Domain.UnitTest", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gym.Application", "src\Gym.Application\Gym.Application.csproj", "{E9969036-A88F-4FD1-A255-CDC085F9C827}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gym.Infrastructure", "src\Gym.Infrastructure\Gym.Infrastructure.csproj", "{A9E1C461-2F02-49E2-8353-9D5FA73C1258}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{E9969036-A88F-4FD1-A255-CDC085F9C827}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9969036-A88F-4FD1-A255-CDC085F9C827}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9969036-A88F-4FD1-A255-CDC085F9C827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E1C461-2F02-49E2-8353-9D5FA73C1258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E1C461-2F02-49E2-8353-9D5FA73C1258}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E1C461-2F02-49E2-8353-9D5FA73C1258}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E1C461-2F02-49E2-8353-9D5FA73C1258}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{44BAC476-36BD-4598-A866-79CF9A3F2AED} = {8648B702-4608-4F8B-930F-0CFED64F2968}
 		{7BBF5E12-87BD-4F0A-A797-9C7EA85019D4} = {B4036732-9A60-45B2-9159-7AA00ECC1252}
 		{E9969036-A88F-4FD1-A255-CDC085F9C827} = {8648B702-4608-4F8B-930F-0CFED64F2968}
+		{A9E1C461-2F02-49E2-8353-9D5FA73C1258} = {8648B702-4608-4F8B-930F-0CFED64F2968}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFA5234E-52E8-4AC2-B3F3-B3CDF021CB95}
