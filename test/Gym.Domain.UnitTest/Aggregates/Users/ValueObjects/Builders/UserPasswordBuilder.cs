@@ -1,4 +1,5 @@
-﻿using Gym.Domain.Aggregates.Users.ValueObjects;
+﻿using Gym.Domain.Aggreagtes.Users.ValueObjects;
+using Gym.Domain.Aggregates.Users.ValueObjects;
 
 namespace Gym.Domain.UnitTest.Aggregates.Users.ValueObjects.Builders;
 

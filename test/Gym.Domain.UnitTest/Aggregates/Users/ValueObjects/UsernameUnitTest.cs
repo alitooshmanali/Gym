@@ -1,10 +1,8 @@
 ﻿using FluentAssertions;
-using Gym.Domain.Aggregates.Users.ValueObjects;
-using Gym.Domain.Aggregates.Users;
 using Gym.Domain.Exceptions;
 using Gym.Domain.Properties;
-using System.Xml.Linq;
 using Gym.Domain.UnitTest.Aggregates.Users.ValueObjects.Builders;
+using User = Gym.Domain.Aggreagtes.Users.User;
 
 namespace Gym.Domain.UnitTest.Aggregates.Users.ValueObjects;
 

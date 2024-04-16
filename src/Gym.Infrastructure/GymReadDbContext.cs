@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Gym.Application.Aggregates.Audits;
 using Gym.Application.Aggregates.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,8 @@ public class GymReadDbContext : DbContext
     }
 
     public DbSet<UserQueryResult> UserQueryResults { get; private set; }
+
+    public DbSet<AuditQueryResult> AuditQueryResults { get; private set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

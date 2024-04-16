@@ -11,7 +11,7 @@ internal class UserIdCannotBeEmptyRule: IBusinessRule
         _value = value;
     }
 
-    public string Message { get; } = string.Format(DomainResources.Global_ValueCannotBeEmpty, nameof(User.Id));
+    public string Message { get; } = string.Format(DomainResources.Global_ValueCannotBeEmpty, nameof(Aggreagtes.Users.User.Id));
 
     public bool IsBroken()
     {

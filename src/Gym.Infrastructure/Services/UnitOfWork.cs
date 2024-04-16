@@ -1,4 +1,5 @@
-﻿using Gym.Application;
+﻿using System.Text.Json;
+using Gym.Application;
 using Gym.Domain;
 using Gym.Infrastructure.Notifications;
 using MediatR;
@@ -50,6 +51,7 @@ public class UnitOfWork: IUnitOfWork
                 throw new InvalidOperationException();
 
             SetAuditingProperties();
+            WriteAudits();
 
             var domainEvents = entries
                 .Where(i => i.Entity.DomainEvents.Any())
@@ -69,6 +71,27 @@ public class UnitOfWork: IUnitOfWork
 
         await _mediator.Publish(new DomainEventsPublishedNotification(), cancellationToken).ConfigureAwait(false);
         await _dbContext.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    private void WriteAudits()
+    {
+        var domainEvents = _dbContext.ChangeTracker.Entries<Entity>()
+            .Where(i => i.Entity.DomainEvents.Any())
+            .SelectMany(i => i.Entity.DomainEvents)
+            .ToArray();
+
+        foreach (var domainEvent in domainEvents)
+            _dbContext.Audits.Add(new()
+            {
+                Id = Guid.NewGuid(),
+                AggregateId = domainEvent.AggregateId,
+                Action = domainEvent.GetType().Name,
+                Time = domainEvent.EventTime,
+                Data = JsonSerializer.Serialize(domainEvent.Flatten()),
+                UserId = _userDescriptor.GetId(),
+                Client = _userDescriptor.GetClient(),
+                ClientAddress = _userDescriptor.GetClientAddress()
+            });
     }
 
     private void SetAuditingProperties()

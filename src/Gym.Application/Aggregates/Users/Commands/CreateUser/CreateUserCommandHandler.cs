@@ -1,6 +1,8 @@
-﻿using Gym.Domain.Aggregates.Users;
+﻿using Gym.Domain.Aggreagtes.Users.ValueObjects;
+using Gym.Domain.Aggregates.Users;
 using Gym.Domain.Aggregates.Users.ValueObjects;
 using MediatR;
+using User = Gym.Domain.Aggreagtes.Users.User;
 
 namespace Gym.Application.Aggregates.Users.Commands.CreateUser;
 

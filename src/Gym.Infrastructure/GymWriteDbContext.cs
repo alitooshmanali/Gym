@@ -1,7 +1,8 @@
-﻿using System.Reflection;
-using Gym.Domain.Aggregates.Users;
+﻿using Gym.Application.Aggregates.Audits;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using System.Reflection;
+using User = Gym.Domain.Aggreagtes.Users.User;
 
 namespace Gym.Infrastructure;
 
@@ -13,6 +14,8 @@ public class GymWriteDbContext : DbContext
     }
 
     public DbSet<User> Users { get; private set; }
+
+    public DbSet<Audit> Audits { get; private set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
