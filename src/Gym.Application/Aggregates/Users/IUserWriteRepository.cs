@@ -1,4 +1,4 @@
-﻿using Gym.Domain.Aggregates.Users;
+﻿using User = Gym.Domain.Aggreagtes.Users.User;
 
 namespace Gym.Application.Aggregates.Users;
 
@@ -6,7 +6,7 @@ public interface IUserWriteRepository
 {
     void Add(User user);
 
-    Task<User> GetByUsername(string username, CancellationToken cancellationToken = default);
+    Task<User?> GetByUsername(string username, CancellationToken cancellationToken = default);
 
-    void Remove(User user);
+    void Remove(User user, Guid deleterId);
 }

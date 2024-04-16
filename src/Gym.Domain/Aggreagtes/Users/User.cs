@@ -1,15 +1,14 @@
-﻿using Gym.Domain.Aggregates.Users.Events;
+﻿using Gym.Domain.Aggreagtes.Users.ValueObjects;
+using Gym.Domain.Aggregates.Users.Events;
 using Gym.Domain.Aggregates.Users.ValueObjects;
 
-namespace Gym.Domain.Aggregates.Users;
+namespace Gym.Domain.Aggreagtes.Users;
 
-public partial class User : Entity, IAggregateRoot
+public class User : Entity, IAggregateRoot
 {
-    private readonly List<UserRole> roles;
 
     private User()
     {
-        roles = new();
     }
 
     public UserId Id { get; private set; }
@@ -21,8 +20,6 @@ public partial class User : Entity, IAggregateRoot
     public UserActivation IsActive { get; private set; }
 
     public UserAddress Address { get; private set; } = null!;
-
-    public IEnumerable<UserRole> Roles => roles.AsReadOnly();
 
     public static User Create(UserId id,
         Username username,

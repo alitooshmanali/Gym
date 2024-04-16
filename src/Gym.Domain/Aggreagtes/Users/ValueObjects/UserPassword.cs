@@ -1,6 +1,7 @@
-﻿using Gym.Domain.Aggregates.Users.ValueObjects.Rules;
+﻿using Gym.Domain.Aggreagtes.Users.ValueObjects.Rules;
+using Gym.Domain.Aggregates.Users.ValueObjects.Rules;
 
-namespace Gym.Domain.Aggregates.Users.ValueObjects;
+namespace Gym.Domain.Aggreagtes.Users.ValueObjects;
 
 public class UserPassword : ValueObject
 {

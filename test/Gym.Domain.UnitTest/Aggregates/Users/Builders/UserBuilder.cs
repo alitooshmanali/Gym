@@ -1,5 +1,5 @@
-﻿using Gym.Domain.Aggregates.Users;
-using Gym.Domain.UnitTest.Aggregates.Users.ValueObjects.Builders;
+﻿using Gym.Domain.UnitTest.Aggregates.Users.ValueObjects.Builders;
+using User = Gym.Domain.Aggreagtes.Users.User;
 
 namespace Gym.Domain.UnitTest.Aggregates.Users.Builders;
 

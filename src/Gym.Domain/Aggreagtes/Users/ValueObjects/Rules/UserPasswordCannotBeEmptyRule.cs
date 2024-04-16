@@ -1,8 +1,8 @@
 ﻿using Gym.Domain.Properties;
 
-namespace Gym.Domain.Aggregates.Users.ValueObjects.Rules;
+namespace Gym.Domain.Aggreagtes.Users.ValueObjects.Rules;
 
-internal class UserPasswordCannotBeEmptyRule: IBusinessRule
+internal class UserPasswordCannotBeEmptyRule : IBusinessRule
 {
     private readonly string _value;
 
@@ -11,7 +11,7 @@ internal class UserPasswordCannotBeEmptyRule: IBusinessRule
         _value = value;
     }
 
-    public string Message { get; } = string.Format(DomainResources.Global_ValueCannotBeEmpty, nameof(User.Password));
+    public string Message { get; } = string.Format(DomainResources.Global_ValueCannotBeEmpty, nameof(Aggreagtes.Users.User.Password));
 
     public bool IsBroken()
     {

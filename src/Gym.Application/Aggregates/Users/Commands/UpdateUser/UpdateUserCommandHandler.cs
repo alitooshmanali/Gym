@@ -1,8 +1,8 @@
 ﻿using Gym.Application.Properties;
-using Gym.Domain.Aggregates.Users;
 using Gym.Domain.Aggregates.Users.ValueObjects;
 using Gym.Domain.Exceptions;
 using MediatR;
+using User = Gym.Domain.Aggreagtes.Users.User;
 
 namespace Gym.Application.Aggregates.Users.Commands.UpdateUser;
 
