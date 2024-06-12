@@ -21,7 +21,7 @@ public partial class UserUnitTest
 
         // act
         user.ChangeUsername(username, updaterId);
-        
+
         // assert
         user.DomainEvents.Should().HaveCount(0);
     }
@@ -141,68 +141,6 @@ public partial class UserUnitTest
 
         user.Id.Value.Should().Be(userId);
         user.IsActive.Value.Should().Be(isActive);
-    }
-
-    [Fact]
-    public void TestChangeUserAddress_ValueIsSame_MustBeNotHappened()
-    {
-        // arrange
-        var user = new UserBuilder()
-            .Build();
-
-        user.ClearEvents();
-
-        // act
-        user.ChangeUserAddress(null!, Guid.NewGuid());
-
-        // assert
-        user.DomainEvents.Should().HaveCount(0);
-    }
-
-    [Fact]
-    public void TestChangeUserAddress_EverythingIsOk_MustBeChanged()
-    {
-        // arrange
-        var userId = Guid.NewGuid();
-        const string countryName = "Iran";
-        const string cityName = "Tehran";
-        const string regionName = "Tehran";
-        const string address = null!;
-        var updaterId = Guid.NewGuid();
-        var user = new UserBuilder()
-            .WithId(userId)
-            .Build();
-        var userAddress = new UserAddressBuilder()
-            .WithCountry(countryName)
-            .WithCityName(cityName)
-            .WithRegionName(regionName)
-            .WithAddress(address)
-            .Build();
-
-        user.ClearEvents();
-
-        // act
-        user.ChangeUserAddress(userAddress, updaterId);
-
-        var changeEvent = user.AssertPublishedDomainEvent<UserAddressChangedEvent>();
-
-        // assert
-        user.DomainEvents.Should().HaveCount(1);
-        changeEvent.AggregateId.Should().Be(userId);
-        changeEvent.OldCountryName.Should().BeNull();
-        changeEvent.OldCityName.Should().BeNull();
-        changeEvent.OldRegionName.Should().BeNull();
-        changeEvent.OldAddress.Should().BeNull();
-
-        changeEvent.NewCountryName.Should().Be(countryName);
-        changeEvent.NewCityName.Should().Be(cityName);
-        changeEvent.NewRegionName.Should().Be(regionName);
-        changeEvent.NewAddress.Should().Be(address);
-
-        changeEvent.UpdaterId.Should().Be(updaterId);
-
-        user.Id.Value.Should().Be(userId);
-        user.Address.Should().Be(userAddress);
     }
 
     [Fact]

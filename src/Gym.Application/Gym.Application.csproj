@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Aggregates\Audits\Queries\GetAuditCollection\" />
-    <Folder Include="Aggregates\Users\Commands\UpdateProfile\" />
     <Folder Include="Aggregates\Users\Queries\GetUserByUsername\" />
     <Folder Include="Behaviors\" />
   </ItemGroup>

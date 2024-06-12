@@ -19,8 +19,6 @@ public class User : Entity, IAggregateRoot
 
     public UserActivation IsActive { get; private set; }
 
-    public UserAddress Address { get; private set; } = null!;
-
     public static User Create(UserId id,
         Username username,
         UserPassword password,
@@ -66,16 +64,6 @@ public class User : Entity, IAggregateRoot
         AddEvent(new UserChangeActivationEvent(Id, IsActive, isActive, updaterId));
 
         IsActive = isActive;
-    }
-
-    public void ChangeUserAddress(UserAddress address, Guid updaterId)
-    {
-        if(Address == address)
-            return;
-
-        AddEvent(new UserAddressChangedEvent(Id, Address, address, updaterId));
-
-        Address = address;
     }
 
     public void Delete(Guid deleterId)
