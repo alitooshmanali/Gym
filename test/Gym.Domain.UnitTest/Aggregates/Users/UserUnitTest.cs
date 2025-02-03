@@ -12,7 +12,6 @@ public partial class UserUnitTest
     public void TestChangeUsername_ValueIsSame_MustBeNotHappened()
     {
         // arrange
-        var updaterId = Guid.NewGuid();
         var username = new UsernameBuilder().Build();
         var user = new UserBuilder()
             .WithUsername(username.Value).Build();
@@ -20,7 +19,7 @@ public partial class UserUnitTest
         user.ClearEvents();
 
         // act
-        user.ChangeUsername(username, updaterId);
+        user.ChangeUsername(username);
 
         // assert
         user.DomainEvents.Should().HaveCount(0);
@@ -31,7 +30,6 @@ public partial class UserUnitTest
     {
         // arrange
         var userId = Guid.NewGuid();
-        var updaterId = Guid.NewGuid();
         var username = "ChangeUsername";
         var updateUsername = new UsernameBuilder().WithUsername(username).Build();
         var user = new UserBuilder()
@@ -42,7 +40,7 @@ public partial class UserUnitTest
         user.ClearEvents();
 
         // act
-        user.ChangeUsername(updateUsername, updaterId);
+        user.ChangeUsername(updateUsername);
 
         var changedEvent = user.AssertPublishedDomainEvent<UsernameChangedEvent>();
 
@@ -51,7 +49,6 @@ public partial class UserUnitTest
         changedEvent.AggregateId.Should().Be(userId);
         changedEvent.OldValue.Should().Be(oldUsername.Value);
         changedEvent.NewValue.Should().Be(updateUsername.Value);
-        changedEvent.UpdaterId.Should().Be(updaterId);
         user.Id.Value.Should().Be(userId);
         user.Username.Value.Should().Be(updateUsername.Value);
     }
@@ -100,7 +97,6 @@ public partial class UserUnitTest
     {
         // arrange
         var isActive = new UserActivationBuilder().Build();
-        var updaterId = Guid.NewGuid();
         var user = new UserBuilder()
             .WithIsActive(isActive.Value)
             .Build();
@@ -108,7 +104,7 @@ public partial class UserUnitTest
         user.ClearEvents();
 
         // act
-        user.ChangeUserActivation(isActive, updaterId);
+        user.ChangeUserActivation(isActive);
 
         // assert
         user.DomainEvents.Should().HaveCount(0);
@@ -120,7 +116,6 @@ public partial class UserUnitTest
         // arrange
         var userId = Guid.NewGuid();
         var isActive = false;
-        var updaterId = Guid.NewGuid();
         var user = new UserBuilder()
             .WithId(userId)
             .Build();
@@ -128,7 +123,7 @@ public partial class UserUnitTest
         user.ClearEvents();
 
         // act
-        user.ChangeUserActivation(new UserActivationBuilder().WithValue(isActive).Build(), updaterId);
+        user.ChangeUserActivation(new UserActivationBuilder().WithValue(isActive).Build());
 
         var changeEvent = user.AssertPublishedDomainEvent<UserChangeActivationEvent>();
 
@@ -137,7 +132,6 @@ public partial class UserUnitTest
         changeEvent.AggregateId.Should().Be(userId);
         changeEvent.OldValue.Should().BeTrue();
         changeEvent.NewValue.Should().BeFalse();
-        changeEvent.UpdaterId.Should().Be(updaterId);
 
         user.Id.Value.Should().Be(userId);
         user.IsActive.Value.Should().Be(isActive);
@@ -151,21 +145,18 @@ public partial class UserUnitTest
         var userId = Guid.NewGuid();
         var username = "UserUsername";
         var password = "UserPas$w0rd";
-        var creatorId = Guid.NewGuid();
 
         // act
         var user = new UserBuilder()
             .WithId(userId)
             .WithUsername(username)
             .WithPassword(password)
-            .WithCreatorId(creatorId)
             .Build();
 
         var createEvent = user.AssertPublishedDomainEvent<UserCreatedEvent>();
 
         createEvent.AggregateId.Should().Be(userId);
         createEvent.Username.Should().Be(username);
-        createEvent.CreatorId.Should().Be(creatorId);
 
         user.Id.Value.Should().Be(userId);
         user.Username.Value.Should().Be(username);
@@ -176,18 +167,16 @@ public partial class UserUnitTest
     public void TestDelete_WhenEverythingIsOk_MustBeMarkedAsDeleted()
     {
         // arrange
-        var deleterId = Guid.NewGuid();
         var user = new UserBuilder().Build();
 
         user.ClearEvents();
 
         // act
-        user.Delete(deleterId);
+        user.Delete();
 
         // assert
         var deletedEvent = user.AssertPublishedDomainEvent<UserDeletedEvent>();
         deletedEvent.AggregateId.Should().Be(user.Id.Value);
-        deletedEvent.DeleterId.Should().Be(deleterId);
         user.CanBeDeleted().Should().BeTrue();
         user.DomainEvents.Should().HaveCount(1);
     }
@@ -198,10 +187,10 @@ public partial class UserUnitTest
         // arrange
         var user = new UserBuilder().Build();
         var deleterId = Guid.NewGuid();
-        user.Delete(deleterId);
+        user.Delete();
 
         // act
-        var action = new Action(() => user.Delete(deleterId));
+        var action = new Action(() => user.Delete());
 
         // assert
         action.Should().Throw<InvalidOperationException>();

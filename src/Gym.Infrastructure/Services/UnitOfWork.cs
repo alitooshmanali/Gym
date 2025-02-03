@@ -13,19 +13,19 @@ public class UnitOfWork: IUnitOfWork
 
     private readonly IMediator _mediator;
 
-    private readonly IUserDescriptor _userDescriptor;
+    //private readonly IUserDescriptor _userDescriptor;
 
-    private readonly ISystemDateTime _systemDateTime;
+    //private readonly ISystemDateTime _systemDateTime;
 
     public UnitOfWork(GymWriteDbContext dbContext
-    , IMediator mediator
-    , IUserDescriptor userDescriptor
-    , ISystemDateTime systemDateTime)
+    , IMediator mediator)
+    //, IUserDescriptor userDescriptor
+    //, ISystemDateTime systemDateTime)
     {
         _dbContext = dbContext;
         _mediator = mediator;
-        _userDescriptor = userDescriptor;
-        _systemDateTime = systemDateTime;
+        //_userDescriptor = userDescriptor;
+        //_systemDateTime = systemDateTime;
     }
 
     public Task BeginTransaction(CancellationToken cancellationToken = default)
@@ -88,9 +88,9 @@ public class UnitOfWork: IUnitOfWork
                 Action = domainEvent.GetType().Name,
                 Time = domainEvent.EventTime,
                 Data = JsonSerializer.Serialize(domainEvent.Flatten()),
-                UserId = _userDescriptor.GetId(),
-                Client = _userDescriptor.GetClient(),
-                ClientAddress = _userDescriptor.GetClientAddress()
+                //UserId = _userDescriptor.GetId(),
+                //Client = _userDescriptor.GetClient(),
+                //ClientAddress = _userDescriptor.GetClientAddress()
             });
     }
 
@@ -107,15 +107,15 @@ public class UnitOfWork: IUnitOfWork
 
             if (entry.State == EntityState.Added)
             {
-                entry.Property("CreatorId").CurrentValue = _userDescriptor.GetId();
-                entry.Property("Created").CurrentValue = _systemDateTime.UtcNow;
+                //entry.Property("CreatorId").CurrentValue = _userDescriptor.GetId();
+               // entry.Property("Created").CurrentValue = _systemDateTime.UtcNow;
             }
 
             if (entry.State != EntityState.Modified)
                 continue;
 
-            entry.Property("UpdaterId").CurrentValue = _userDescriptor.GetId();
-            entry.Property("Updated").CurrentValue = _systemDateTime.UtcNow;
+            //entry.Property("UpdaterId").CurrentValue = _userDescriptor.GetId();
+            //entry.Property("Updated").CurrentValue = _systemDateTime.UtcNow;
         }
     }
 }

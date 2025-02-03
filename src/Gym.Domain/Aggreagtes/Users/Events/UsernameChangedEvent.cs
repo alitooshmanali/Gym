@@ -4,15 +4,12 @@ namespace Gym.Domain.Aggregates.Users.Events;
 
 public class UsernameChangedEvent : BaseDomainEvent
 {
-    public UsernameChangedEvent(UserId id, Username oldValue, Username newValue, Guid updaterId)
+    public UsernameChangedEvent(UserId id, Username oldValue, Username newValue)
         : base(id.Value)
     {
         OldValue = oldValue.Value;
         NewValue = newValue.Value;
-        UpdaterId = updaterId;
     }
-
-    public Guid UpdaterId { get; }
 
     public string NewValue { get; }
 

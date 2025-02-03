@@ -25,9 +25,9 @@ public class UserWriteRepository: IUserWriteRepository
             .FirstOrDefaultAsync(cancellationToken);
     }
 
-    public void Remove(User user, Guid deleterId)
+    public void Remove(User user)
     {
-        user.Delete(deleterId);
+        user.Delete();
         _dbContext.Users.Remove(user);
     }
 }

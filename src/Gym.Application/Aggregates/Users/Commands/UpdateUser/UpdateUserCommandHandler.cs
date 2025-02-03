@@ -23,6 +23,6 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
         if (user is null)
             throw new DomainException(string.Format(ApplicationResources.Global_UnableToFind, nameof(User)));
 
-        user.ChangeUsername(Username.Create(request.Username), request.UpdaterId);
+        user.ChangeUsername(Username.Create(request.Username));
     }
 }

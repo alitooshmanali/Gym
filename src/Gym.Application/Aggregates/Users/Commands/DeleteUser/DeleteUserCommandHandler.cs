@@ -22,6 +22,6 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
         if (user is null)
             throw new DomainException(string.Format(ApplicationResources.Global_UnableToFind, nameof(User)));
 
-        user.Delete(request.DeleterId);
+        user.Delete();
     }
 }

@@ -13,12 +13,9 @@ public class UserBuilder
 
     private bool _isActive;
 
-    private Guid _creatorId;
-
     public UserBuilder()
     {
         _id = Guid.NewGuid();
-        _creatorId = Guid.NewGuid();
         _username = "Username";
         _password = "UserPa$$w0rd";
         _isActive = true;
@@ -45,13 +42,6 @@ public class UserBuilder
         return this;
     }
 
-    public UserBuilder WithCreatorId(Guid value)
-    {
-        _creatorId = value;
-
-        return this;
-    }
-
     public UserBuilder WithIsActive(bool value)
     {
         _isActive = value;
@@ -63,6 +53,5 @@ public class UserBuilder
         new UserIdBuilder().WithValue(_id).Build(),
         new UsernameBuilder().WithUsername(_username).Build(),
         new UserPasswordBuilder().WithPassword(_password).Build(),
-        new UserActivationBuilder().WithValue(_isActive).Build(),
-        _creatorId);
+        new UserActivationBuilder().WithValue(_isActive).Build());
 }

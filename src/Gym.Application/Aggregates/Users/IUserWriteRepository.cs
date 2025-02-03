@@ -8,5 +8,5 @@ public interface IUserWriteRepository
 
     Task<User?> GetByUsername(string username, CancellationToken cancellationToken = default);
 
-    void Remove(User user, Guid deleterId);
+    void Remove(User user);
 }

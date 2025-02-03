@@ -22,8 +22,7 @@ public class User : Entity, IAggregateRoot
     public static User Create(UserId id,
         Username username,
         UserPassword password,
-        UserActivation activation,
-        Guid creatorId)
+        UserActivation activation)
     {
         var user = new User
         {
@@ -33,17 +32,17 @@ public class User : Entity, IAggregateRoot
             IsActive = activation
         };
 
-        user.AddEvent(new UserCreatedEvent(id, username, creatorId));
+        user.AddEvent(new UserCreatedEvent(id, username));
 
         return user;
     }
 
-    public void ChangeUsername(Username username, Guid updaterId)
+    public void ChangeUsername(Username username)
     {
         if(Username == username)
             return;
 
-        AddEvent(new UsernameChangedEvent(Id, Username, username, updaterId));
+        AddEvent(new UsernameChangedEvent(Id, Username, username));
 
         Username = username;
     }
@@ -56,22 +55,22 @@ public class User : Entity, IAggregateRoot
         Password = password;
     }
 
-    public void ChangeUserActivation(UserActivation isActive, Guid updaterId)
+    public void ChangeUserActivation(UserActivation isActive)
     {
         if(IsActive == isActive)
             return;
 
-        AddEvent(new UserChangeActivationEvent(Id, IsActive, isActive, updaterId));
+        AddEvent(new UserChangeActivationEvent(Id, IsActive, isActive));
 
         IsActive = isActive;
     }
 
-    public void Delete(Guid deleterId)
+    public void Delete()
     {
         if (CanBeDeleted())
             throw new InvalidOperationException();
 
-        AddEvent(new UserDeletedEvent(Id, deleterId));
+        AddEvent(new UserDeletedEvent(Id));
 
         MarkAsDeleted();
     }

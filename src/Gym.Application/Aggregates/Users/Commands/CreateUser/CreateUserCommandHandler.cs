@@ -21,8 +21,7 @@ public class CreateUserCommandHandler: IRequestHandler<CreateUserCommand, string
         var user = User.Create(UserId.Create(userId),
             Username.Create(request.Username),
             UserPassword.Create(request.Password),
-            UserActivation.Create(true),
-            request.CreatorId);
+            UserActivation.Create(true));
 
         _writeRepository.Add(user);
 

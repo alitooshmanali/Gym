@@ -19,15 +19,10 @@ public class UserReadRepository: IUserReadRepository
                                 U.""Username"",
                                 U.""Description"",
                                 U.""IsActive"",
-                                COALESCE(UC.""Username"", U.""CreatorId""::TEXT) AS ""Creator"",
-                                COALESCE(UU.""Username"", U.""UpdaterId""::TEXT) AS ""Updater"",
                                 U.""Created"",
                                 U.""Updated"",
                                 U.""Version""
-                    FROM        ""Users"" AS U
-                    LEFT JOIN   ""Users""       AS UC   ON U.""CreatorId""      = UC.""Id""
-                    LEFT JOIN   ""Users""       AS UU   ON U.""UpdaterId""      = UU.""Id""
-                ");
+                    FROM        ""Users"" AS U");
     }
 
     public async Task<UserQueryResult?> GetByUsername(string username, CancellationToken cancellationToken = default)
@@ -37,14 +32,10 @@ public class UserReadRepository: IUserReadRepository
                                 U.""Username"",
                                 U.""Description"",
                                 U.""IsActive"",
-                                COALESCE(UC.""Username"", U.""CreatorId""::TEXT) AS ""Creator"",
-                                COALESCE(UU.""Username"", U.""UpdaterId""::TEXT) AS ""Updater"",
                                 U.""Created"",
                                 U.""Updated"",
                                 U.""Version""
                     FROM        ""Users"" AS U
-                    LEFT JOIN   ""Users""       AS UC   ON U.""CreatorId""      = UC.""Id""
-                    LEFT JOIN   ""Users""       AS UU   ON U.""UpdaterId""      = UU.""Id""
                     WHERE       U.""Username"" = {{0}}
                 ", username)
             .FirstOrDefaultAsync(cancellationToken)
